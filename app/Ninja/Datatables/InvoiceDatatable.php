@@ -93,13 +93,24 @@ class InvoiceDatatable extends EntityDatatable
         ];
     }
 
+    private function getCloneActionText($entityType)
+    {
+        $text = 'texts.clone_';
+        $myEntityType = $this->entityType;
+        if ($entityType !== $myEntityType) {
+            $text .= 'to_';
+        }
+        $text .= $entityType;
+        return trans($text);
+    }
+
     public function actions()
     {
         $entityType = $this->entityType;
 
         return [
             [
-                trans("texts.clone_invoice"),
+                $this->getCloneActionText('invoice'),
                 function ($model) {
                     return URL::to("invoices/{$model->public_id}/clone");
                 },
@@ -108,7 +119,7 @@ class InvoiceDatatable extends EntityDatatable
                 },
             ],
             [
-                trans("texts.clone_quote"),
+                $this->getCloneActionText('quote'),
                 function ($model) {
                     return URL::to("quotes/{$model->public_id}/clone");
                 },

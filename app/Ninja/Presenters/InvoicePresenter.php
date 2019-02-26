@@ -236,17 +236,28 @@ class InvoicePresenter extends EntityPresenter
         return [$data];
     }
 
+    private function getCloneActionText($entityType)
+    {
+        $text = 'texts.clone_';
+        $myEntityType = $this->entity->getEntityType();
+        if ($entityType !== $myEntityType) {
+            $text .= 'to_';
+        }
+        $text .= $entityType;
+        return trans($text);
+    }
+
     public function moreActions()
     {
         $invoice = $this->entity;
         $entityType = $invoice->getEntityType();
 
         $actions = [
-            ['url' => 'javascript:onCloneInvoiceClick()', 'label' => trans("texts.clone_invoice")]
+            ['url' => 'javascript:onCloneInvoiceClick()', 'label' => $this->getCloneActionText('invoice')]
         ];
 
         if (Auth::user()->can('createEntity', ENTITY_QUOTE)) {
-            $actions[] = ['url' => 'javascript:onCloneQuoteClick()', 'label' => trans("texts.clone_quote")];
+            $actions[] = ['url' => 'javascript:onCloneQuoteClick()', 'label' => $this->getCloneActionText('quote')];
         }
 
         $actions[] = ['url' => url("{$entityType}s/{$entityType}_history/{$invoice->public_id}"), 'label' => trans('texts.view_history')];

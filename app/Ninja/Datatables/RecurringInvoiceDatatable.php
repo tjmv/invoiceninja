@@ -106,7 +106,7 @@ class RecurringInvoiceDatatable extends EntityDatatable
                 },
             ],
             [
-                trans("texts.clone_invoice"),
+                trans('texts.clone_to_invoice'),
                 function ($model) {
                     return URL::to("invoices/{$model->public_id}/clone");
                 },
@@ -115,7 +115,7 @@ class RecurringInvoiceDatatable extends EntityDatatable
                 },
             ],
             [
-                trans("texts.clone_quote"),
+                trans('texts.clone_to_quote'),
                 function ($model) {
                     return URL::to("quotes/{$model->public_id}/clone");
                 },
