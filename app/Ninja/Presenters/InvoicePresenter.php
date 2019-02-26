@@ -300,7 +300,7 @@ class InvoicePresenter extends EntityPresenter
             }
         }
 
-        if (count($actions) > 3) {
+        if (count($actions) > 3 && $actions[count($actions)-1] !== DropdownButton::DIVIDER) {
             $actions[] = DropdownButton::DIVIDER;
         }
 
